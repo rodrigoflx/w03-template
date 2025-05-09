@@ -56,7 +56,11 @@ public class CanteenControllerTest {
 
     @Test
     public void testGetTodayMeals_ReturnsNoContent_WhenNoMealsAvailable() throws Exception {
-         // TODO implement this test
+         // Mock the API response
+        when(restTemplate.getForObject(anyString(), eq(Week.class))).thenReturn(new Week(15, 2024, List.of()));
+
+        // Act & Assert
+        getList("/{canteenName}/today", HttpStatus.NO_CONTENT, Dish.class, "mensa-garching");
     }
 
     @Test
